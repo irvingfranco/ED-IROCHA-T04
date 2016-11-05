@@ -25,28 +25,24 @@ public class nodetree {
         this.left= left;
         this.right = right;
     }
-    public int getData() {
+    public int getdata() {
         return data;
     }
-    /*public NodeTree getDad() {
-        return dad;
-    }*/
-    public nodetree getLeft() {
+   
+    public nodetree getleft() {
         return left;
     }
-    public nodetree getRight() {
+    public nodetree getright() {
         return right;
     }
     public void setdata(int data) {
         this.data = data;
     }
-    /*public void setDad(NodeTree dad) {
-        this.dad = dad;
-    }*/
-    public void setLeft(nodetree left) {
+   
+    public void setleft(nodetree left) {
         this.left = left;
     }
-    public void setRight(nodetree right) {
+    public void setright(nodetree right) {
         this.right = right;
     }
 }

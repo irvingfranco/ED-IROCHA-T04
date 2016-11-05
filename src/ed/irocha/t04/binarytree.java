@@ -13,8 +13,6 @@ public class binarytree {
     nodetree root;
     int height;
     int elements;
-    //Methods
-    //Contructor
     public binarytree () {
         this.root = null;
         this.height = -1;
@@ -26,7 +24,7 @@ public class binarytree {
     public binarytree (nodetree root){
         this.root = root;
     }
-    public nodetree getRoot() {
+    public nodetree getroot() {
         return root;
     }
     public int getheight() {
@@ -35,26 +33,26 @@ public class binarytree {
     public int getelements() {
         return elements;
     }
-    public void setRoot(nodetree root) {
+    public void setroot(nodetree root) {
         this.root = root;
     }
-    public void setHeight(int height) {
+    public void setheight(int height) {
         this.height = height;
     }
-    public void setElements(int elements) {
+    public void setelements(int elements) {
         this.elements = elements;
     }
-    public boolean isEmpty(){
+    public boolean isempty(){
         return root == null;
     }
-    public boolean isEmpty(nodetree root){
+    public boolean isempty(nodetree root){
         return root.left == null && root.right == null;
     }
     nodetree node = new nodetree();
     public void insert(int data){
-        //NodeTree node = new NodeTree(data);
+        
         node = new nodetree(data);
-        if(isEmpty()) {
+        if(isempty()) {
             root = node;
         } else {
             this.insert(node, this.root);
@@ -62,7 +60,7 @@ public class binarytree {
     }
     public void insert(nodetree node, nodetree root){
         if(node.data == root.data) {
-            System.out.println("El número ya fue introducido");
+            System.out.println("el numero ya existe");
         } else if(node.data < root.data) {
             if(root.left == null) {
                 root.left = node;
@@ -78,46 +76,47 @@ public class binarytree {
         }
         this.elements++;
     }
-    //EMPIEZA EL RECORRIDO EN PREORDEN
-    public synchronized void PreOrden() {
-        aPreorden(root);
+    
+    public  void preorden() {
+        apreorden(root);
     }
-    private void aPreorden(nodetree node) {
+    private void apreorden(nodetree node) {
         if(node == null) {
             return;
         }
-        System.out.print(node.data + " ");     //mostrar datos del nodo
-        aPreorden(node.left);   //recorre subarbol izquierdo
-        aPreorden(node.right);     //recorre subarbol derecho
+        System.out.print(node.data + " ");     
+        apreorden(node.left);   
+        apreorden(node.right);    
     }
-    //EMPEZAR RECORRIDO INORDEN
-    public synchronized void InOrden() {
-        aInorden(root);
+    
+    public synchronized void inorden() {
+        ainorden(root);
     }
-    private void aInorden(nodetree node) {
+    private void ainorden(nodetree node) {
         if(node == null) {
             return;
         }
-        aInorden(node.left);
+        ainorden(node.left);
         System.out.print(node.data + " ");
-        aInorden(node.right);
+        ainorden(node.right);
     }
-    //EMPEZAR RECORRIDO PORORDEN
-    public synchronized void PosOrden(){
-        aPosorden(root);        
+    
+    public synchronized void posorden(){
+        aposorden(root);        
     }
-    private void aPosorden(nodetree node) {
+    private void aposorden(nodetree node) {
         if(node == null) {
             return;
         }
-        aPosorden(node.left);
-        aPosorden(node.right);
+        aposorden(node.left);
+        aposorden(node.right);
         System.out.print(node.data + " ");
     }
     boolean hijoIzq = true;
     nodetree dad;
+    
     public nodetree search(int data){
-        if(!isEmpty()){
+        if(!isempty()){
             nodetree t;
             t = dad = root;
             while(t.data != data){
@@ -137,14 +136,14 @@ public class binarytree {
                 }
             }
             return t;
-        }System.out.println("no esta");
+        }System.out.println("no se encuentra");
         return null;
     }
     public boolean delete(int data){
-        if(!this.isEmpty()){
+        if(!this.isempty()){
             nodetree t = search(data);
           
-            if(isEmpty(t)){
+            if(isempty(t)){
                 if(root == t){
                     root = null;
                 } else if (hijoIzq){
@@ -169,12 +168,46 @@ public class binarytree {
                     dad.left = t.right;
                 }
             }
-            //Caso 3 dos hijos
+           
         }
         return true;
     }
-   
-    private boolean removeNodoCaso1(nodetree node) {
+    public boolean delete2(int data) {
+        nodetree a = search(data);
+        nodetree dad = root;
+        if(a == null){
+            System.out.println("no se encontró el nodo."); 
+            return false;
+        } else {
+            boolean nD;
+            if(a.right == null){
+                nD = false;
+            } else{
+                nD = true;
+            }
+            boolean nI;
+            if(a.left == null){
+                nI = false;
+            } else {
+                nI = true;
+            }
+            if(isempty(a)){
+                return removeCaso1(a);
+            }
+            
+            if (nD && !nI) {
+               
+            }
+            if (!nD && nI) {
+               ;
+            }
+            if (nD && nI) {
+                
+            }
+            return false;
+        }
+    }
+    private boolean removeCaso1(nodetree node) {
         nodetree hI = node.left;
         nodetree hD = node.right;
         if (hI == node) {
